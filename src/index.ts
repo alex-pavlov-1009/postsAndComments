@@ -49,9 +49,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 let appServer;
 
 const initApp = async () => {
-  console.log('Testing the database connection..');
-
-  // Test the connection.
   try {
     await db.authenticate();
     appServer = app.listen(process.env.PORT, () => {
