@@ -4086,6 +4086,11 @@ string-length@^4.0.1:
     char-regex "^1.0.2"
     strip-ansi "^6.0.0"
 
+string-strip-html@8.5.0:
+  version "8.5.0"
+  resolved "https://registry.yarnpkg.com/string-strip-html/-/string-strip-html-8.5.0.tgz#5e239fe84016fad7b33ca02d23c591f1ccb6af75"
+  integrity sha512-5ICsK1B1j0A3AF1d45m0sqQCcmi1Q+t1QpF+b794LO5FTHV+ITkGR5C+UCDJQZgs5LMuRruqr6j48PxQVIurJQ==
+
 string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"

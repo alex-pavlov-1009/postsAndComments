@@ -5,8 +5,8 @@ import * as commentValidate from './comment.validate';
 
 const router = Router();
 
-router.get('/list', jwtAuthGuard, commentController.getAll);
+router.get('/list', jwtAuthGuard, commentValidate.findRules, commentController.getAll);
 
-router.post('/create', jwtAuthGuard, commentValidate.rules, commentController.create);
+router.post('/create', jwtAuthGuard, commentValidate.createRules, commentController.create);
 
 export default router;

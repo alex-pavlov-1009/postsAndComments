@@ -5,8 +5,8 @@ import * as postValidate from './post.validate';
 
 const router = Router();
 
-router.get('/list', jwtAuthGuard, postController.getAll);
+router.get('/list', jwtAuthGuard, postValidate.findRules, postController.findAllByGroupId);
 
-router.post('/create', jwtAuthGuard, postValidate.rules, postController.create);
+router.post('/create', jwtAuthGuard, postValidate.createRules, postController.create);
 
 export default router;

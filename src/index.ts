@@ -9,7 +9,6 @@ import commentRouter from './modules/comment/comment.router';
 import postRouter from './modules/post/post.router';
 import { JwtAuthError } from './error/jwt.error';
 import db from './config/database';
-import { DBQueryError } from './error/db.error';
 import { ExpressValidationError } from './error/express.validation.error';
 
 dotenv.config();
@@ -40,6 +39,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     res
       .status(StatusCodes.BAD_REQUEST)
       .json({ msg: err.message, validationErrors: err.errorDetails });
+    return;
   }
   res
     .status(StatusCodes.BAD_REQUEST)

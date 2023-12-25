@@ -19,7 +19,7 @@ export default (req: Request, res: Response, next: NextFunction) => {
     throw new JwtAuthError();
   }
 
-  if (!decodedToken) {
+  if (!decodedToken || typeof decodedToken.id !== 'number') {
     throw new JwtAuthError();
   }
 

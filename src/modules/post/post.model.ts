@@ -3,7 +3,7 @@ import {
 } from 'sequelize';
 import sequelize from '../../config/database';
 
-interface IPostModel extends Model<
+export interface IPostModel extends Model<
 InferAttributes<IPostModel>,
 InferCreationAttributes<IPostModel>
 > {
@@ -18,6 +18,8 @@ InferCreationAttributes<IPostModel>
   createdAt: CreationOptional<Date>;
 
   updatedAt: CreationOptional<Date>;
+
+  commentsCount?: number;
 }
 
 export const PostModel = sequelize.define<IPostModel>(
