@@ -28,7 +28,6 @@ app.use((req: Request, res: Response) => {
 });
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(err.stack);
   if (err instanceof JwtAuthError) {
     res
       .status(StatusCodes.FORBIDDEN)
@@ -51,11 +50,9 @@ let appServer;
 const initApp = async () => {
   try {
     await db.authenticate();
-    appServer = app.listen(process.env.PORT, () => {
-      console.log(
-        `App listening at ${process.env.BASE_URL}:${process.env.PORT}`,
-      );
-    });
+    if (process.env.NODE_ENV !== 'test') {
+      appServer = app.listen(process.env.PORT);
+    }
   } catch (error) {
     console.error('Unable to connect to the database:', error.original);
   }
@@ -82,3 +79,5 @@ process.on('SIGTERM', () => {
     appServer.close();
   }
 });
+
+export default app;

@@ -5,7 +5,7 @@ import { PostModel } from '../post/post.model';
 const postIdExistCheck = async (value: number, erroeMsg: string) => {
   let id = value;
   if (!id) {
-    throw new Error(erroeMsg);
+    throw new Error('Post id must be a positive number');
   }
   if (typeof id === 'string') {
     id = Number(id);

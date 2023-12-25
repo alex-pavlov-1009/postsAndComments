@@ -1,4 +1,5 @@
 import { stripHtml } from 'string-strip-html';
+import { MAX_TEXT_LENGTH } from '../../definitions/const';
 
 export type PostCreateDtoDBFormat = {
   group_id: number,
@@ -23,7 +24,7 @@ class PostDto {
 
   constructor(groupId: number, text: string, createdBy: number, commentsCount?: number, createdAt?: Date, updatedAt?: Date, id?: number) {
     this.groupId = groupId;
-    this.text = stripHtml(text).result;
+    this.text = stripHtml(text).result.substring(0, MAX_TEXT_LENGTH);
     this.createdBy = createdBy;
     if (createdAt) {
       this.createdAt = createdAt;

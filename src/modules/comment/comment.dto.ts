@@ -1,4 +1,5 @@
 import { stripHtml } from 'string-strip-html';
+import { MAX_TEXT_LENGTH } from '../../definitions/const';
 
 export type CommentCreateDtoDBFormat = {
   post_id: number,
@@ -21,7 +22,7 @@ class CommentDto {
 
   constructor(postId: number, text: string, createdBy: number, createdAt?: Date, updatedAt?: Date, id?: number) {
     this.postId = postId;
-    this.text = stripHtml(text).result;
+    this.text = stripHtml(text).result.substring(0, MAX_TEXT_LENGTH);
     this.createdBy = createdBy;
     if (createdAt) {
       this.createdAt = createdAt;
