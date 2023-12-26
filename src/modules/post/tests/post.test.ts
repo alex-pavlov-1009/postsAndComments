@@ -9,7 +9,9 @@ import app from '../../../index';
 
 dotenv.config();
 
-const jwtToken = jwt.sign({ id: 1 }, process.env.SECRET_KEY);
+const jwtToken = jwt.sign({ id: 3 }, process.env.SECRET_KEY);
+const jwtTokenWithInvalidId = jwt.sign({ id: 'test' }, process.env.SECRET_KEY);
+const jwtTokenWithoutId = jwt.sign({}, process.env.SECRET_KEY);
 
 type ValidationErrorItem = {
   location: string,
@@ -55,6 +57,22 @@ describe('Comment Endpoints', () => {
 
   it('should fail jwt guard', async () => {
     const response = await request(app)
+      .get('/post/list?groupId=1')
+      .set('Authorization', `Bearer ${jwtTokenWithoutId}`);
+    expect(response.status).toEqual(403);
+    expect(response.body).toEqual({ msg: 'Your jwt token is not valid.' });
+  });
+
+  it('should fail jwt guard', async () => {
+    const response = await request(app)
+      .get('/post/list?groupId=1')
+      .set('Authorization', `Bearer ${jwtTokenWithInvalidId}`);
+    expect(response.status).toEqual(403);
+    expect(response.body).toEqual({ msg: 'Your jwt token is not valid.' });
+  });
+
+  it('should fail jwt guard', async () => {
+    const response = await request(app)
       .post('/post/create');
     expect(response.status).toEqual(403);
     expect(response.body).toEqual({ msg: 'Your jwt token is not valid.' });
@@ -66,6 +84,22 @@ describe('Comment Endpoints', () => {
       .set('Authorization', `Bearer ${jwtToken}`);
     expect(response.status).toEqual(200);
     expect(response.body).toEqual({ posts: [] });
+  });
+
+  it('should fail jwt guard', async () => {
+    const response = await request(app)
+      .post('/post/create')
+      .set('Authorization', `Bearer ${jwtTokenWithoutId}`);
+    expect(response.status).toEqual(403);
+    expect(response.body).toEqual({ msg: 'Your jwt token is not valid.' });
+  });
+
+  it('should fail jwt guard', async () => {
+    const response = await request(app)
+      .post('/post/create')
+      .set('Authorization', `Bearer ${jwtTokenWithInvalidId}`);
+    expect(response.status).toEqual(403);
+    expect(response.body).toEqual({ msg: 'Your jwt token is not valid.' });
   });
 
   it('should return all post validation Errors', async () => {
@@ -130,6 +164,7 @@ describe('Comment Endpoints', () => {
         groupId: 1,
         text: 'new post text',
         commentsCount: 0,
+        createdBy: 3,
       },
     });
     expect(responseCommentCreate.status).toEqual(200);
@@ -147,6 +182,7 @@ describe('Comment Endpoints', () => {
           groupId: 1,
           text: 'new post text',
           commentsCount: 1,
+          createdBy: 3,
         },
       ],
     });
