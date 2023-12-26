@@ -13,8 +13,8 @@ const postIdExistCheck = async (value: number, erroeMsg: string) => {
       throw new Error('Post id must be a positive number');
     }
   }
-  const clientWithSameValue = await PostModel.findOne({ where: { id } });
-  if (!clientWithSameValue) {
+  const clientWithSameValue = await PostModel.count({ where: { id } });
+  if (clientWithSameValue === 0) {
     throw new Error(erroeMsg);
   }
   return true;
