@@ -1,5 +1,5 @@
 # postsAndComments
-Node application to manage posts and it's linked comments based on express framework
+Node application to manage posts and comments based on express framework
 
 ## Required environment
 ```
