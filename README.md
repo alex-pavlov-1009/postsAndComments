@@ -4,7 +4,7 @@ Node application to manage posts and comments based on express framework
 ## Required environment
 ```
 1) nodejs v18.17.1 - to install visit https://nodejs.org/en/download/
-2) postgres v14.10 - to install visit https://docs.mongodb.com/manual/installation/
+2) postgres v14.10 - to install visit https://www.postgresql.org/download/
 ```
 
 ## Project setup
